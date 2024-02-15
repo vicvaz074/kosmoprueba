@@ -6,7 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import { DarkModeProvider } from './DarkModeContext';
 import Axios from 'axios';
 
-Axios.defaults.baseURL = 'https://kosmoback-b5dcadabd4cd.herokuapp.com/';
+Axios.defaults.baseURL = 'https://kosmoprueba-09bb3b275582.herokuapp.com/';
+
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
