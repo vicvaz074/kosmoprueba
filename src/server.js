@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
+require('dotenv').config(); // At the top of your server.js
 const User = require('./user.js');
 const authMiddleware = require('./authMiddleware.js'); // Asumiendo que tienes un middleware para autenticación
 const authRoutes = require('./authRoutes'); // Ajusta la ruta según la ubicación de tu archivo
@@ -11,7 +12,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 // Conectar a MongoDB
-mongoose.connect('mongodb+srv://vicvaz:hola@clusterkosmotry.sgcxxks.mongodb.net/?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log('MongoDB Connected'))
