@@ -25,6 +25,7 @@
 .password-toggle img {
   width: 20px; /* Ajusta el ancho del ícono */
   height: auto; 
+  filter: invert(50%); /* Invierte el color del ícono */
 }
 
 .input-group {
