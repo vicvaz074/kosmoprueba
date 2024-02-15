@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { DarkModeProvider } from './DarkModeContext';
-import axios, { Axios } from 'axios';
+import Axios from 'axios';
 
 Axios.defaults.baseURL = 'https://kosmoback-b5dcadabd4cd.herokuapp.com/';
 
