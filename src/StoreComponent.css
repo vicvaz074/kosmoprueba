@@ -1,0 +1,44 @@
+.store-component {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .store-component h2 {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .store-component .card {
+    border: none;
+    transition: transform 0.3s ease-in-out;
+    width: 80%;
+  }
+  
+  .store-component .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    width: fit-content;
+
+  }
+  
+  .store-component.dark-mode .card {
+    background-color: #2c3e50;
+    color: #ecf0f1;
+  }
+  
+  .store-component.dark-mode .btn-success {
+    background-color: #18bc9c;
+    border-color: #18bc9c;
+  }
+  
+  .store-component .card-title {
+    color: #333; /* Adjust based on dark mode */
+  }
+
+  
+  .store-component.dark-mode .card-title {
+    color: #ecf0f1;
+  }
+  
+  /* Add more styles as needed */
+  
