@@ -92,9 +92,6 @@ button:hover {
     background-color: #1B1464;
 }
 
-.modal, .modal-content {
-    display: none; /* Si necesitas utilizar modales, ajusta este estilo */
-}
 
 @media screen and (max-width: 768px) {
     .chat-container, .modal-content {
