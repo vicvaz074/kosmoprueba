@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fa308acd.css",
+    "main.js": "/static/js/main.69b62f90.js",
+    "static/js/787.331ce86a.chunk.js": "/static/js/787.331ce86a.chunk.js",
+    "static/media/NOSOTROS.mp4": "/static/media/NOSOTROS.410981b5fd98915ae5e8.mp4",
+    "static/media/PLANETA.png": "/static/media/PLANETA.95f19106a491f27ec5f9.png",
+    "static/media/thumbnail.png": "/static/media/thumbnail.3b9389b73d63d844b6c9.png",
+    "static/media/NAVE.png": "/static/media/NAVE.cfe41c32d7923558b762.png",
+    "static/media/CABEZA.png": "/static/media/CABEZA.7d5edd17eea651daf9e1.png",
+    "static/media/CONJUNTO_AZULV2.svg": "/static/media/CONJUNTO_AZULV2.7e4cb2e0298df100a51bc5a393f7d406.svg",
+    "static/media/KOSMO_CONSTRUCTOR.svg": "/static/media/KOSMO_CONSTRUCTOR.a3c3c468d6b5b461c2a9d26effbd7f41.svg",
+    "static/media/KOSMO_OXXO.svg": "/static/media/KOSMO_OXXO.8713ffee9c3b2cfa4819b4d4d2f0748d.svg",
+    "static/media/CONJUNTO_AMARILLOV2.svg": "/static/media/CONJUNTO_AMARILLOV2.6da88282b3a0405dc94bcf0277f95776.svg",
+    "static/media/KOSMO_BASICO.svg": "/static/media/KOSMO_BASICO.05c8b277cee1575bcb6a67c38f5d70b4.svg",
+    "static/media/KOSMO_BOT_BASICO.svg": "/static/media/KOSMO_BOT_BASICO.05c8b277cee1575bcb6a67c38f5d70b4.svg",
+    "static/media/CONJUNTO_ROJOV3.svg": "/static/media/CONJUNTO_ROJOV3.a39c9aa2452cd34882da2b8b6720fa34.svg",
+    "static/media/KOSMO_AZUL.svg": "/static/media/KOSMO_AZUL.c3fb3d741b0d79ee2e122e1a66f0683b.svg",
+    "static/media/eye_icon.svg": "/static/media/eye_icon.9fa744aa85545355137888e23eb81e49.svg",
+    "static/media/LOGO_BLANCO.svg": "/static/media/LOGO_BLANCO.4a6fcb641d25964c89c2568bb855bbc5.svg",
+    "static/media/LOGO_AZULOSC.svg": "/static/media/LOGO_AZULOSC.7745114d9b1dc939ccb96f6db26a5f30.svg",
+    "static/media/CANDADO.svg": "/static/media/CANDADO.7e6100d646f6ef5cf08f0a8d3ff8c3af.svg",
+    "index.html": "/index.html",
+    "static/media/LOGO_USER_ICONE.svg": "/static/media/LOGO_USER_ICONE.be7946e49e799efd84c476a12f33c3f7.svg",
+    "main.fa308acd.css.map": "/static/css/main.fa308acd.css.map",
+    "main.69b62f90.js.map": "/static/js/main.69b62f90.js.map",
+    "787.331ce86a.chunk.js.map": "/static/js/787.331ce86a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fa308acd.css",
+    "static/js/main.69b62f90.js"
+  ]
+}
