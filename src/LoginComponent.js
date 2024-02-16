@@ -22,7 +22,7 @@ const LoginComponent = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://tu-backend-en-heroku.herokuapp.com/login', {
+      const response = await fetch('https://kosmoprueba-09bb3b275582.herokuapp.com/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
