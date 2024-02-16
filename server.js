@@ -11,8 +11,15 @@ const authRoutes = require('./src/authRoutes.js');
 
 const app = express();
 
-// Middleware de CORS
-app.use(cors());
+// Configuración de CORS para aceptar peticiones de tu frontend
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? "https://kosmoprueba-09bb3b275582.herokuapp.com/" // URL de tu frontend en producción
+    : "http://localhost:3000", // URL de tu frontend en desarrollo
+  optionsSuccessStatus: 200
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
@@ -26,7 +33,7 @@ mongoose.connect(process.env.MONGODB_URI, {
 // Importar rutas de autenticación
 app.use(authRoutes);
 
-// Ruta protegida como ejemplo
+// Rutas protegidas como ejemplo
 app.get('/tryme', authMiddleware, (req, res) => {
   res.send('Dashboard Accesible');
 });
@@ -35,14 +42,14 @@ app.get('/store', authMiddleware, (req, res) => {
   res.send('Store content is protected');
 });
 
-// Sirve los archivos estáticos de la carpeta build de React
-// Coloca esta parte justo antes de la configuración de escucha del puerto
-app.use(express.static(path.join(__dirname, 'build')));
+// Si estás en producción, sirve los archivos estáticos de la carpeta build de React
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'build')));
 
-// Maneja cualquier solicitud que no sea de la API para servir el archivo index.html de React
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+}
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor ejecutándose en el puerto ${PORT}`));
