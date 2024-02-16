@@ -11,7 +11,7 @@
   .store-component .card {
     border: none;
     transition: transform 0.3s ease-in-out;
-    width: 80%;
+    width: 100%;
   }
   
   .store-component .card:hover {
@@ -43,9 +43,9 @@
     animation: fly 2s ease forwards;
   }
   
+  
 
-
-  .store-component.dark-mode .card {
+  .store-component.dark-mode .card  {
     background-color: #2c3e50;
     color: #ecf0f1;
   }
@@ -106,28 +106,4 @@
   cursor: pointer;
   font-size: 1.5rem; /* Tamaño de la fuente para el botón de cierre */
   z-index: 1052 !important; /* Asegura que el botón de cierre está por encima del contenido del modal */
-}
-
-/* Media queries para ajustes responsivos */
-@media (max-width: 768px) {
-  .store-component .card {
-    width: 90%; /* Tarjetas más anchas en pantallas más pequeñas */
-  }
-
-  .store-component-modal-content {
-    padding: 15px; /* Menos padding en pantallas pequeñas */
-    max-width: 95%; /* Aprovecha más el espacio disponible */
-  }
-
-  .test-modal-component, .store-component-modal-backdrop {
-    height: auto; /* Permite que el modal se ajuste al contenido */
-    min-height: 100vh; /* Asegura que cubre toda la pantalla */
-  }
-}
-
-/* Ajustes adicionales para pantallas aún más pequeñas */
-@media (max-width: 480px) {
-  .store-component .card {
-    width: 100%; /* Utiliza todo el ancho disponible */
-  }
 }

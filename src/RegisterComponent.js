@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './RegisterComponent.css';
+import { DarkModeContext } from './DarkModeContext';
 import registerBasicBot from './assets/img/KOSMO_BOT_BASICO.svg';
 import registerUserIcon from './assets/img/LOGO_USER_ICONE.svg';
 import registerPasswordIcon from './assets/img/CANDADO.svg';
@@ -15,6 +16,7 @@ const RegisterComponent = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState('');
+  const { darkMode } = useContext(DarkModeContext);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -53,7 +55,7 @@ const RegisterComponent = () => {
 
   return (
     <div>
-      <div className="register-wrapper">
+      <div className={`register-wrapper ${darkMode ? 'dark-mode' : ''}`}>
         <div className="register-panel-wrapper">
           <div className="register-panel">
             <div className="register-content">

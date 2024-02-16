@@ -152,6 +152,9 @@ const ChatButton = ({ setShowModal }) => {
 };
 
 
+useEffect(() => {
+  document.body.className = darkMode ? 'dark-mode' : '';
+}, [darkMode]);
 
   useEffect(() => {
     const updateContentMargin = () => {
