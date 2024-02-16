@@ -4,9 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { DarkModeProvider } from './DarkModeContext';
-import Axios from 'axios';
 
-Axios.defaults.baseURL = 'https://kosmoprueba-09bb3b275582.herokuapp.com/';
 
 
 const container = document.getElementById('root');

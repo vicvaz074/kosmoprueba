@@ -31,27 +31,48 @@ const plans = [
   }
 ];
 
-
 const StoreComponent = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState({});
   const [show, setShow] = useState(false);
   const { darkMode } = useContext(DarkModeContext);
 
   const handlePurchase = (plan) => {
-    setCart(currentCart => [...currentCart, plan]);
+    setCart(currentCart => {
+      const existingItem = currentCart[plan.id];
+      return {
+        ...currentCart,
+        [plan.id]: {
+          ...plan,
+          quantity: existingItem ? existingItem.quantity + 1 : 1,
+        },
+      };
+    });
     setShow(true);
   };
 
-  const handleRemove = (indexToRemove) => {
-    setCart(currentCart => currentCart.filter((item, index) => index !== indexToRemove));
+  const handleRemove = (idToRemove) => {
+    setCart(currentCart => {
+      if (currentCart[idToRemove].quantity > 1) {
+        return {
+          ...currentCart,
+          [idToRemove]: {
+            ...currentCart[idToRemove],
+            quantity: currentCart[idToRemove].quantity - 1,
+          },
+        };
+      } else {
+        const newCart = { ...currentCart };
+        delete newCart[idToRemove];
+        return newCart;
+      }
+    });
   };
 
   const calculateTotal = () => {
-    return cart.reduce((total, currentItem) => total + parseFloat(currentItem.price), 0);
+    return Object.values(cart).reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0);
   };
 
   const handleClose = () => setShow(false);
-
 
   return (
     <PayPalScriptProvider options={{ "client-id": "Ac0qDlDi02O3I2ITV_94dnm3BFFMU3n872UKBZGHD4uPU5uqsDof_rPc9SZu5M2di2i_lkZZHuR3VxY4", "currency": "USD", "intent": "capture" }}>
@@ -77,10 +98,10 @@ const StoreComponent = () => {
           </Modal.Header>
           <Modal.Body>
             <ListGroup>
-              {cart.map((item, index) => (
+              {Object.values(cart).map((item, index) => (
                 <ListGroupItem key={index} className="d-flex justify-content-between align-items-center">
-                  {item.title} - ${item.price}
-                  <Button variant="danger" size="sm" onClick={() => handleRemove(index)}>Eliminar</Button>
+                  {item.title} - ${item.price} x {item.quantity}
+                  <Button variant="danger" size="sm" onClick={() => handleRemove(item.id)}>Eliminar</Button>
                 </ListGroupItem>
               ))}
             </ListGroup>
@@ -95,17 +116,16 @@ const StoreComponent = () => {
                 return actions.order.create({
                   purchase_units: [{
                     amount: {
-                      value: calculateTotal().toString(), // Actualiza esto al monto real
+                      value: calculateTotal().toString(),
                     },
                   }],
                 });
               }}
               onApprove={(data, actions) => {
                 return actions.order.capture().then((details) => {
-                  // Implementa aquí la lógica después de una compra exitosa
                   console.log(details);
                   handleClose();
-                  setCart([]); // Vaciar el carrito
+                  setCart({});
                 });
               }}
             />
