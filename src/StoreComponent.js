@@ -7,6 +7,7 @@ import kosmoOxxo from './assets/img/KOSMO_OXXO.svg';
 import kosmoConstructor from './assets/img/KOSMO_CONSTRUCTOR.svg';
 import './StoreComponent.css';
 
+
 const plans = [
   {
     id: 'basic',
@@ -24,7 +25,7 @@ const plans = [
   },
   {
     id: 'premium',
-    title: 'KOSMO TIER PREMIUM',
+    title: 'KOSMO TIER PREMIUM - Suscripción Mensual',
     description: '$129 dolares/mes - Todos los beneficios de los Tiers anteriores. Acceso prioritario a atención al cliente. Herramientas de imagen y lenguaje adicionales para una mayor personalización.',
     image: kosmoConstructor,
     price: '129', // Agregar precio aquí
@@ -34,9 +35,16 @@ const plans = [
 const StoreComponent = () => {
   const [cart, setCart] = useState({});
   const [show, setShow] = useState(false);
+  const [purchaseCompleted, setPurchaseCompleted] = useState({});
   const { darkMode } = useContext(DarkModeContext);
+  const [showSuccessNotification, setShowSuccessNotification] = useState(false);
+
+  
 
   const handlePurchase = (plan) => {
+    // Si ya se compró, no hacer nada
+    if (purchaseCompleted[plan.id]) return;
+
     setCart(currentCart => {
       const existingItem = currentCart[plan.id];
       return {
@@ -52,27 +60,30 @@ const StoreComponent = () => {
 
   const handleRemove = (idToRemove) => {
     setCart(currentCart => {
-      if (currentCart[idToRemove].quantity > 1) {
-        return {
-          ...currentCart,
-          [idToRemove]: {
-            ...currentCart[idToRemove],
-            quantity: currentCart[idToRemove].quantity - 1,
-          },
-        };
-      } else {
-        const newCart = { ...currentCart };
-        delete newCart[idToRemove];
-        return newCart;
-      }
+      const newCart = { ...currentCart };
+      delete newCart[idToRemove];
+      return newCart;
     });
   };
 
   const calculateTotal = () => {
-    return Object.values(cart).reduce((total, item) => total + (parseFloat(item.price) * item.quantity), 0);
+    return Object.values(cart).reduce((total, item) => total + (item.price * item.quantity), 0);
   };
 
   const handleClose = () => setShow(false);
+
+  const handlePaymentSuccess = (planId) => {
+    setPurchaseCompleted(prevState => ({...prevState, [planId]: true}));
+    setShow(false); // Cierra el modal tras el pago exitoso
+    setCart({}); // Limpia el carrito tras el pago exitoso
+    setShowSuccessNotification(true); // Muestra la notificación de éxito
+  
+    // Oculta la notificación después de 4 segundos
+    setTimeout(() => {
+      setShowSuccessNotification(false);
+    }, 4000);
+  };
+  
 
   return (
     <PayPalScriptProvider options={{ "client-id": "Ac0qDlDi02O3I2ITV_94dnm3BFFMU3n872UKBZGHD4uPU5uqsDof_rPc9SZu5M2di2i_lkZZHuR3VxY4", "currency": "USD", "intent": "capture" }}>
@@ -86,13 +97,15 @@ const StoreComponent = () => {
                 <Card.Body>
                   <Card.Title>{plan.title}</Card.Title>
                   <Card.Text>{plan.description}</Card.Text>
-                  <Button variant="success" onClick={() => handlePurchase(plan)}>Comprar Ahora</Button>
+                  <Button variant="success" onClick={() => handlePurchase(plan)} disabled={purchaseCompleted[plan.id]}>
+                    {purchaseCompleted[plan.id] ? 'Activado' : 'Comprar Ahora'}
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>
           ))}
         </Row>
-        <Modal show={show} onHide={handleClose} size="lg">
+        <Modal show={show} onHide={handleClose} size="lg" className="fade-in">
           <Modal.Header closeButton>
             <Modal.Title>Carrito de Compras</Modal.Title>
           </Modal.Header>
@@ -110,8 +123,8 @@ const StoreComponent = () => {
             <div className="me-auto">
               <strong>Total: ${calculateTotal().toFixed(2)}</strong>
             </div>
-            <Button variant="secondary" onClick={handleClose}>Cerrar</Button>
-            <PayPalButtons 
+
+            <PayPalButtons
               createOrder={(data, actions) => {
                 return actions.order.create({
                   purchase_units: [{
@@ -123,15 +136,24 @@ const StoreComponent = () => {
               }}
               onApprove={(data, actions) => {
                 return actions.order.capture().then((details) => {
-                  console.log(details);
-                  handleClose();
-                  setCart({});
+                  Object.keys(cart).forEach(planId => handlePaymentSuccess(planId));
                 });
               }}
             />
           </Modal.Footer>
         </Modal>
+        {showSuccessNotification && (
+        <div className="notification-container" style={{ position: 'fixed', top: '20px', right: '20px', zIndex: '1050' }}>
+          <div className="alert alert-success alert-dismissible fade show" role="alert" style={{ display: 'flex', alignItems: 'center' }}>
+            <i className="fas fa-check-circle" style={{ marginRight: '10px' }}></i>
+            ¡Compra completada con éxito! Gracias por tu compra.
+          </div>
+        </div>
+      )}
       </Container>
+      <div className="footer">
+        <p>© Kosmo. Todos los derechos reservados.</p>
+      </div>
     </PayPalScriptProvider>
   );
 }

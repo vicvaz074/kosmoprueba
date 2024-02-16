@@ -6,43 +6,15 @@
   .store-component h2 {
     margin-top: 2rem;
     text-align: center;
+    font-size: 2rem;
   }
   
-  .store-component .card {
-    border: none;
-    transition: transform 0.3s ease-in-out;
-    width: 100%;
-  }
   
   .store-component .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    width: fit-content;
 
   }
-
-/* CSS para centrar el botón en la pantalla */
-.test-modal-component {
-  height: 100vh; /* Ocupar todo el alto de la pantalla */
-  display: flex;
-  justify-content: center; /* Centrar horizontalmente */
-  align-items: center; /* Centrar verticalmente */
-}
-
-  @keyframes fly {
-    0% { transform: scale(0.5); opacity: 0; }
-    50% { transform: scale(1.2); opacity: 1; }
-    100% { transform: scale(1); opacity: 0; }
-  }
-  
-  .success-animation {
-    width: 100px;
-    height: 100px;
-    background-color: green;
-    border-radius: 50%;
-    animation: fly 2s ease forwards;
-  }
-  
   
 
   .store-component.dark-mode .card  {
@@ -57,6 +29,7 @@
   
   .store-component .card-title {
     color: #333; /* Adjust based on dark mode */
+    font-size: 1.1rem;
   }
 
   
@@ -64,7 +37,6 @@
     color: #ecf0f1;
   }
   
-  /* Add more styles as needed */
 
 
   /* Estilos para el modal específico del StoreComponent */
@@ -84,10 +56,9 @@
 .store-component-modal-content {
   background-color: #fff; /* Fondo blanco para el contenido del modal */
   padding: 20px; /* Ajuste razonable para el padding */
-  display: block !important;
   justify-content: center; /* Centra el contenido horizontalmente */
   align-items: center; /* Centra el contenido verticalmente */
-  border-radius: 8px;
+  display: flex;
   color: black; /* Asegúrate de que el texto sea visible contra el fondo blanco */
   position: relative;
   width: auto; /* Esto permitirá que el modal se ajuste al contenido */
@@ -106,4 +77,141 @@
   cursor: pointer;
   font-size: 1.5rem; /* Tamaño de la fuente para el botón de cierre */
   z-index: 1052 !important; /* Asegura que el botón de cierre está por encima del contenido del modal */
+}
+
+/* Estilos para la notificación de éxito */
+.notification-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1050;
+  animation: slideIn 0.5s ease-out forwards;
+}
+
+.alert-success {
+  display: flex;
+  align-items: center;
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  border: 1px solid #c3e6cb;
+}
+
+.fas.fa-check-circle {
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.btn-close {
+  margin-left: auto;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  color: #155724;
+  opacity: 0.8;
+}
+
+.btn-close:hover {
+  opacity: 1;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Opcional: Estilo para el botón de cierre al pasar el mouse */
+.btn-close:focus,
+.btn-close:hover {
+  background-color: transparent;
+  color: #1e7e34;
+}
+
+.store-component .row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.store-component .card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Esto empuja el botón hacia abajo */
+  height: 100%; /* Asegura que el card-body ocupe toda la altura de la card */
+}
+
+
+/* Asegúrate de que todas las tarjetas tengan la misma altura */
+.store-component .card {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  height: 100%;
+}
+
+.store-component .card-text {
+  margin-top: 1rem; /* Espacio por encima de la descripción */
+  font-size: 0.9rem; /* Tamaño de la descripción */
+  text-align: justify;
+
+}
+
+.store-component .btn-success {
+  margin-top: auto; /* Esto asume que la card es un contenedor flex */
+  width: 60%;
+  align-self: center; /* Centra el botón horizontalmente */
+}
+
+.store-component .card-img-top {
+  height: 350px; /* Establece una altura fija para todas las imágenes */
+  object-fit: fill; /* Asegura que la imagen se cubra adecuadamente sin perder sus proporciones */
+  width: 100%; /* Establece un ancho fijo al 100% del contenedor */
+}
+
+/* Media queries para dispositivos móviles */
+@media (max-width: 767px) {
+  .store-component {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .store-component h2 {
+    margin-top: 4rem;
+  }
+
+  .store-component .card:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .store-component .card-body {
+    padding: 1rem; /* Ajusta el relleno para móviles */
+  }
+
+  .store-component .card {
+    width: 85%; /* Ocupa el ancho completo en dispositivos móviles */
+    margin: 0 auto; /* Centra horizontalmente */
+  }
+
+  .store-component .btn-success {
+    width: 100%; /* Botones de ancho completo en dispositivos móviles */
+    margin-top: 1rem; /* Asegúrate de que haya espacio por encima del botón */
+    margin: 0 auto; /* Centra horizontalmente */
+  }
+
+  .store-component-modal-content {
+    width: 90%; /* Usa un poco más de ancho para el modal en móviles */
+    max-width: none;
+  }
+
+  .store-component .card-img-top {
+    height: auto; /* Altura automática para mantener la proporción de las imágenes */
+  }
 }
