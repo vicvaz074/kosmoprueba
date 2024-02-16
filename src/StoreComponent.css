@@ -209,9 +209,24 @@
   .store-component-modal-content {
     width: 90%; /* Usa un poco más de ancho para el modal en móviles */
     max-width: none;
+    margin: 0 auto; /* Centra horizontalmente */
   }
 
   .store-component .card-img-top {
     height: auto; /* Altura automática para mantener la proporción de las imágenes */
   }
+}
+
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(20%);
+  }
+}
+
+.fade-in {
+  animation: slideDown 0.7s forwards;
 }
