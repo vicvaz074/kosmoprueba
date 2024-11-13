@@ -75,24 +75,24 @@ const KosmoTryComponent = () => {
     setIsTyping(true);
 
     try {
-      const response = await axios.post(
-        'https://api.openai.com/v1/chat/completions',
-        {
-          model: "gpt-4o-mini",
-          messages: [
-            botPrompt,
-            { role: "user", content: userMessage }
-          ],
-          temperature: 0.7,
-        },
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+        const response = await axios.post(
+          'https://api.openai.com/v1/chat/completions',
+          {
+            model: "gpt-4o-mini",  // Cambia "gpt-3.5-turbo" por "gpt-4o-mini"
+            messages: [
+              botPrompt,
+              { role: "user", content: userMessage }
+            ],
+            temperature: 0.7,
           },
-        }
-      );
-
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer ${process.env.REACT_APP_OPENAI_API_KEY}`,
+            },
+          }
+        );
+      
       setIsTyping(false);
       setCanSendMessage(true); // Reactiva el envío de mensajes
       
